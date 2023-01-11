@@ -2,4 +2,4 @@
 
 ## Owner Don Welch
 
-alter this statement to indicate the usage of this repository
+This is a public repository that will contain the classroom examples for the course CPSC1012. I can share this repository and the classroom examples with other individuals.
