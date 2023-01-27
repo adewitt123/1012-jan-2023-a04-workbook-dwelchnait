@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecisionStructures", "DecisionStructures\DecisionStructures.csproj", "{8A5F6C5C-19D7-4B82-B170-03F155D85163}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecisionStructures", "DecisionStructures\DecisionStructures.csproj", "{8A5F6C5C-19D7-4B82-B170-03F155D85163}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecisionMakingProblen", "DecisionMakingProblen\DecisionMakingProblen.csproj", "{6958B9CF-E82F-477B-8809-328A8F2E469D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{8A5F6C5C-19D7-4B82-B170-03F155D85163}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A5F6C5C-19D7-4B82-B170-03F155D85163}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A5F6C5C-19D7-4B82-B170-03F155D85163}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6958B9CF-E82F-477B-8809-328A8F2E469D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6958B9CF-E82F-477B-8809-328A8F2E469D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6958B9CF-E82F-477B-8809-328A8F2E469D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6958B9CF-E82F-477B-8809-328A8F2E469D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
