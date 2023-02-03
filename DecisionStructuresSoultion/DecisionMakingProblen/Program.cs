@@ -62,24 +62,49 @@ string inputValue;
 Console.Write("Enter the customer age: ");
 inputValue = Console.ReadLine();
 Age = int.Parse(inputValue);
-//example of single branch ifs
-//a coding if style referred to as if/elseif
+//example of a nested if
+
 if (Age <= 6)
 {
     Amount = 0.0;
 }
-else if (Age <= 17)  //7 to 17
+else 
 {
-    Amount = 9.80;
-}
-else if (Age < 54)
-{
-    Amount = 11.35;
-}
-else
-{
-    Amount = 10.00;
+    if (Age <= 17)  //7 to 17
+    {
+        Amount = 9.80;
+    }
+    else
+    {
+        if (Age < 54)
+        {
+            Amount = 11.35;
+        }
+        else
+        {
+            Amount = 10.00;
+        }
+    }     
 }
 
+
+//example of single branch ifs
+//a coding if style referred to as if/elseif
+//if (Age <= 6)
+//{
+//    Amount = 0.0;
+//}
+//else if (Age <= 17)  //7 to 17
+//{
+//    Amount = 9.80;
+//}
+//else if (Age < 54)
+//{
+//    Amount = 11.35;
+//}
+//else
+//{
+//    Amount = 10.00;
+//}
 Console.WriteLine($"Your ticket costs {Amount.ToString("$#,##0.00")}");
 Console.WriteLine($"Your ticket costs {Amount:c}");
