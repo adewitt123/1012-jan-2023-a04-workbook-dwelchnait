@@ -2,7 +2,7 @@
 Console.WriteLine("Loop Problems");
 
 //SumOfSquares(); //calling statement
-AverageOfListOfNumbers();
+//AverageOfListOfNumbers();
 //ReverseNumber();
 
 void SumOfSquares() //the method
