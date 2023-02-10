@@ -4,6 +4,7 @@ Console.WriteLine("Loop Problems");
 //SumOfSquares(); //calling statement
 //AverageOfListOfNumbers();
 //ReverseNumber();
+GuessThatNumber();
 
 void SumOfSquares() //the method
 {
@@ -97,4 +98,97 @@ void AverageOfListOfNumbers()
         averageOfNumbers = (double)sumOfNumbers / countOfNumbers; //type cast integer sumOfNumbers to a double
     }
     Console.WriteLine($"\nAverage of the {countOfNumbers} entered is {averageOfNumbers}");
+}
+
+void ReverseNumber()
+{
+    string inputValue;
+    int lengthOfString = 0;
+    string stringDigit;
+
+    Console.WriteLine("\nPrint digit string in Reserve\n");
+
+    Console.Write("Enter a string of digits, no spaces: ");
+    inputValue= Console.ReadLine();
+
+    //Instead of assuming that the input value is small
+    //      enough to be an integer/long this solution
+    //      will treat the inptut value as a string
+
+    //determine # of times through the loop
+    //the number of times through the loop is the
+    //  number of digits in the string
+    //the string class: Length property of strings
+    lengthOfString = inputValue.Length; //natural count
+
+    //repeatitive code
+    //start the counter at the end of the string (length)
+    //move in the direction of the head of the string (decrement)
+    //the lenthOfString is a natural count  1,2,3,4....
+    //the loop needs to use an index count  0,1,2,3 .....
+
+    Console.WriteLine("\n For loop processing\n");
+    for (int counter = lengthOfString-1;
+            counter >=0; counter--)
+    {
+        //extract the last character of the string
+        //the .Substring(indexofcharacter, length of characters)
+        stringDigit = inputValue.Substring(counter, 1);
+        //write that character out to the console
+        Console.WriteLine(stringDigit);
+        
+    }
+
+    Console.WriteLine("\n while loop processing\n");
+    int counter2 = lengthOfString-1;
+    while(counter2 >=0)
+    {
+        stringDigit = inputValue.Substring(counter2, 1);
+        Console.WriteLine(stringDigit);
+        counter2--;
+    }
+}
+
+void GuessThatNumber()
+{
+    Random random = new Random();  //this is the random number generator
+
+    Console.WriteLine("\nGuess that random number\n");
+
+    //the random number generator can limit the range of values
+    //the number generated is from the lowest value inclusive to the higest number - 1 inclusive
+    // between 1 and 100 inclusive, use 1 and 101
+    int targetNumber = random.Next(1, 101);
+
+    string inputValue;
+    int guessCounts = 0;
+    int guessNumber = 0;
+
+    Console.WriteLine("\nGuess a number between 1 and 100. How many times will it take you?\n");
+    //since we need to do the code at least once
+    //consider using a do while (post test) loop
+    do
+    {
+        Console.Write("Enter your guess: ");
+        inputValue = Console.ReadLine();
+        guessNumber = int.Parse(inputValue);
+        guessCounts++;
+
+        if (guessNumber == targetNumber)
+        {
+            Console.WriteLine(("\n Correct that is my secret number\n"));
+        }
+        else
+        {
+            if (guessNumber < targetNumber)
+            {
+                Console.WriteLine("You guess was too low");
+            }
+            else
+            {
+                Console.WriteLine("You guess was too high");
+            }
+        }
+    } while (guessNumber != targetNumber);
+    Console.WriteLine($"\nYou  guess the number {targetNumber} in {guessCounts} times.");
 }
