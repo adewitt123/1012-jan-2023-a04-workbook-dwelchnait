@@ -35,12 +35,15 @@ switch (choice.ToUpper())                               //ToUpper is a method
         {
             string faceString = "";
             int faces = 0;
+            int castValue = 0;
             Console.Write("Enter the number of faces your die has: ");
             faceString = Console.ReadLine();
             if (int.TryParse(faceString, out faces))
             {
                 if (faces > 1)
                 {
+                    //Passing a value to a method
+
                     //to pass data into a method you can use two mechanisms
                     //a) pass by value : passes value type data (int, double, decimal,...)
                     //                   this type of data sends a copy of the value to
@@ -60,7 +63,18 @@ switch (choice.ToUpper())                               //ToUpper is a method
                     //  a) match the number of parameters*
                     //  b) each argument data type must match the receiving method parameter
                     //  c) the order argument MUST align with the order of parameters
-                    RollDice(faces);                 //calling statement
+
+                    //Receiving a return value from a method
+                    
+                    //the return variable must exist in the same scope or above
+                    //  as the method
+                    //the datatype of the return variable must match that of the
+                    //  method returndatatype
+                    //return values DO NOT need to be captured
+                    //if a method does not have a return datatype, then your call
+                    //  statement cannot have return variable
+                    castValue = RollDice(faces);                 //calling statement
+                    Console.WriteLine($"The die face says {castValue}");
                 }
                 else
                 {
@@ -132,12 +146,29 @@ void GetLotoNumbers()
 //parameteres are NOT to be re-declared as a method variable as being on the
 //  parameter list is BEING DECLARED
 //all variable and parameters have a limited scope of the method
-void RollDice(int faces)
+
+//method may return or not return a value
+//methods that do NOT return a value have returndatatype value of void (keyword)
+//methods that DO return a value have a valid C# datatype as the returndatatype
+//methods that DO return a value return a single value (instance*
+//methods that DO return a value MUST have a return statement
+//the syntax of a return statment is:  return valid-C#-expression
+//methods that DO return a value place the returndatatype in fron of the methodname
+//      instead of the keyword void
+//WELL coded methods will have a single return statement
+//you MAY have any number of return statements in a method, HOWEVER, multiple return
+//  statements indicate a poorly structure method
+//Once return statement is executed, you "leave" the method with no further processing
+//  of logic within the method
+//methods that are void, execute to the end of the code.
+
+int RollDice(int faces)
 {
     //the parameter faces is receiving a COPY of the argument value
     
     Random rnd = new Random();
     int dieFace = 1; //chose 1 as the valid value over the numeric default of 0
     dieFace = rnd.Next(1, faces + 1);
-    Console.WriteLine($"The die face says {dieFace}");
+    //Console.WriteLine($"The die face says {dieFace}");
+    return dieFace;
 }
