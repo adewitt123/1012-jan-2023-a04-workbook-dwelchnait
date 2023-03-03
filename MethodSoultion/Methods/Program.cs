@@ -6,6 +6,7 @@ Console.WriteLine("A Structure World");
 //purpose
 //a) structure code for easier maintenance
 //b) compress overall code by modularizing common code
+//c) well designed method do one action and return
 
 //this small snippet of code is a "driver routine"
 
@@ -24,23 +25,60 @@ Console.Write("Enter your choice: ");
 choice = Console.ReadLine();                            //ReadLine is a method
 switch (choice.ToUpper())                               //ToUpper is a method
     {
-    case "A":
-    {
-        GetLotoNumbers();           //calling statement
+        case "A":
+        {
+            GetLotoNumbers();           //calling statement
 
-        break;
+            break;
+        }
+        case "B":
+        {
+            string faceString = "";
+            int faces = 0;
+            Console.Write("Enter the number of faces your die has: ");
+            faceString = Console.ReadLine();
+            if (int.TryParse(faceString, out faces))
+            {
+                if (faces > 1)
+                {
+                    //to pass data into a method you can use two mechanisms
+                    //a) pass by value : passes value type data (int, double, decimal,...)
+                    //                   this type of data sends a copy of the value to
+                    //                          the method
+                    //                   the original data remains unchanged
+                    //b) pass by reference : passes reference type data (string, array, object ...)
+                    //                   this type of data sends the reference address to 
+                    //                          the method
+                    //                   changes to reference type data is to the ORIGINAL data
+                    //the term used for the values being sent to the method is: arguments
+                    //syntax
+                    //  methodname([list of arguments])
+                    //where the list of argumments are valid C# expressions separated by a comma
+                    //C# expressions:
+                    //   literal, variable, a method, calculation
+                    //your list of arguments MUST
+                    //  a) match the number of parameters*
+                    //  b) each argument data type must match the receiving method parameter
+                    //  c) the order argument MUST align with the order of parameters
+                    RollDice(faces);                 //calling statement
+                }
+                else
+                {
+                    Console.WriteLine($"The face coount of {faces} is invalid. Your die must have at least 2 sides");
+                }
+            }
+            else
+            {
+                Console.WriteLine("The number of faces needs to be a whole number.");
+            }
+            break;
+        }
+        default:
+        {
+                Console.WriteLine($"You menu choice {choice} is invalid.");
+            break;
+        }
     }
-    case "B":
-    {
-        RollDice();                 //calling statement
-        break;
-    }
-    default:
-    {
-            Console.WriteLine($"You menu choice {choice} is invalid.");
-        break;
-    }
-}
 
 /* ********************************************************************************* */
 
@@ -88,10 +126,18 @@ void GetLotoNumbers()
     Console.WriteLine($"Your lucky number for today are: {numbers}");
 }
 
-void RollDice()
+//methods can receive value via parameters
+//methods can receive multiple values
+//the method signature parameters are a paired set: datatype localvariablename
+//parameteres are NOT to be re-declared as a method variable as being on the
+//  parameter list is BEING DECLARED
+//all variable and parameters have a limited scope of the method
+void RollDice(int faces)
 {
+    //the parameter faces is receiving a COPY of the argument value
+    
     Random rnd = new Random();
     int dieFace = 1; //chose 1 as the valid value over the numeric default of 0
-    dieFace = rnd.Next(1, 7);
+    dieFace = rnd.Next(1, faces + 1);
     Console.WriteLine($"The die face says {dieFace}");
 }
