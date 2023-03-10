@@ -9,22 +9,31 @@ width = PromptForInt("Enter your width (such as 32):");
 do
 {
     menuChoice = ShowMenu();
-    switch (menuChoice)
+    switch (menuChoice.ToUpper())
     {
         case "A":
         {
-            break;
+                Console.WriteLine($" the area of a rectangle: length {length} and width {width} is\t" +
+                                        CalculateArea(length, width));
+                Console.Write("\nTry Again? Enter Y to try again.\t");
+                menuChoice = Console.ReadLine();
+                break;
         }
         case "B":
         {
-            break;
+                Console.WriteLine($" the volume of 10 unit height rectangle: length {length} and width {width} is\t" +
+                                       CalculateVolume(length, width));
+                Console.Write("\nTry Again? Enter Y to try again.\t");
+                menuChoice = Console.ReadLine();
+                break;
         }
         default:
         {
             Console.ForegroundColor = ConsoleColor.DarkRed;
             Console.WriteLine($"\t\tYour choice of {menuChoice} is invalid\n\n");
             Console.ForegroundColor = ConsoleColor.White;
-            Console.WriteLine("Try Again? Enter Y to try again.");
+            Console.Write("\nTry Again? Enter Y to try again.\t");
+            menuChoice = Console.ReadLine();
             break;
         }
     }
@@ -58,30 +67,33 @@ int PromptForInt(string label)
 }
 
 
-    bool IsPostive(decimal value)
+    bool IsPostive(int value)
 {
     bool valid = false;
-    if (value >= 0.0m)
+    if (value >= 0)
     {
         valid = true;
     }
     return valid;
 }
 
-decimal CalculatePay(decimal hours, decimal wage)
+string ShowMenu()
 {
-    decimal grosspay = 0.00m;
-    if (hours <= 40.0m)
-    {
-        grosspay = hours * wage;
-    }
-    else if (hours <= 50.0m)
-    {
-        grosspay = (40 * wage) + ((hours - 40) * (wage * 1.5m));
-    }
-    else
-    {
-        grosspay = (40 * wage) + (10.0m * (wage * 1.5m)) + ((hours - 50) * (wage * 2.0m));
-    }
-    return grosspay;
+    string menuChoice = "";
+    Console.WriteLine("Area or Volume\n");
+    Console.WriteLine("a) Area");
+    Console.WriteLine("b) Volume");
+    Console.Write("Enter your calculation:\t");
+    menuChoice = Console.ReadLine();
+    return menuChoice;
+}
+
+int CalculateArea(int length, int width)
+{
+    return length * width;
+}
+
+int CalculateVolume(int length, int width)
+{
+    return width * length * 10;
 }

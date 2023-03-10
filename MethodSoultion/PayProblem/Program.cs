@@ -9,7 +9,9 @@ if (IsPostive(wage))
     if (IsPostive(hours))
     {
         Console.WriteLine($"Your gross pay is " +
-                       $" ${CalculatePay(hours,wage).ToString()}");
+                       $" ${CalculatePay(hours,wage).ToString("#,##0.00")}");
+        Console.WriteLine($"Your gross pay is " +
+                      $" {string.Format("{0:c}",CalculatePay(hours, wage))}");
     }
     else
     {
@@ -39,7 +41,7 @@ decimal PromptForDecimal(string label)
 
 }
 
-bool IsPostive(decimal value)
+ bool IsPostive(decimal value)
 {
     bool valid = false;
     if (value >= 0.0m)
@@ -48,6 +50,7 @@ bool IsPostive(decimal value)
     }
     return valid;
 }
+
 
 decimal CalculatePay(decimal hours, decimal wage)
 {
