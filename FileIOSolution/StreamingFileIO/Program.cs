@@ -1,11 +1,53 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 
+using System.IO;
+
 Console.WriteLine("File IO using Streaming Technique\n\n");
 
 //WriteFile();
-ReadFile();
+//ReadFile();
 
+string filePath = @"../../../SampleFile.txt";
+//string filePath = @"../../SampleFile.txt";
+//string filePath = @"../../../Emptyfile.txt";
+//string filePath = @"../../../NonExistingFile.txt";
+StreamReader streamReader = null;
+
+//empty the path name to generate an error
+//filePath = null;
+//setup the stream for the Reader
+streamReader = new StreamReader(filePath);
+try
+{
+    ReadFileThrowException(streamReader);
+}
+catch (ArgumentNullException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+catch (FileNotFoundException ex)
+{
+    Console.WriteLine(ex.Message);
+}
+catch (Exception ex)
+{
+    //ex is the error
+    //ex contains many properties
+    //Message property contains your error message
+    //to access the error message you will use the object operator . (dot)
+    //  syntax   objecctinstancename.propertyname
+    //                    ex        .   Message
+    Console.WriteLine(ex.Message);
+}
+finally
+
+{
+    if (streamReader != null)
+    {
+        streamReader.Close();
+    }
+}
 void WriteFile()
 {
     //in this method we will write a series of lines
@@ -81,35 +123,116 @@ void WriteFile()
 void ReadFile()
 {
     string filePath = @"../../../SampleFile.txt";
+    //string filePath = @"../../SampleFile.txt";
     //string filePath = @"../../../Emptyfile.txt";
     //string filePath = @"../../../NonExistingFile.txt";
-
-    //setup the stream for the Reader
-    StreamReader streamReader = new StreamReader(filePath);
-    Console.WriteLine($"\nReading from the file {filePath}");
-    //used to hold the incoming line from the file
-    string readLine;
-    int countReadLines = 0;
-
-    //start reading the lines
-    readLine = streamReader.ReadLine(); //read a line from the file
-    //proccess the lines read from the file
-    //if the readLine is null then no line was return on the
-    //  execution of .ReadLine()
-    //the value of your string will be null
-    //you can use this fact to determine the end of the file
-    while(readLine != null)
+    StreamReader streamReader = null;
+    try
     {
-        //you have a line from the file to process
-        countReadLines++;
-        Console.WriteLine($"Line {countReadLines} is {readLine}");
-        //get the next line from the file IF it exists
-        //if you have reached the end of the file
-        //  your readLine will be null
-        readLine = streamReader.ReadLine();
+        //empty the path name to generate an error
+        //filePath = null;
+        //setup the stream for the Reader
+        streamReader = new StreamReader(filePath);
+        Console.WriteLine($"\nReading from the file {filePath}");
+        //used to hold the incoming line from the file
+        string readLine;
+        int countReadLines = 0;
+
+        int badnumericConversion = 0;
+       
+
+
+        //start reading the lines
+        readLine = streamReader.ReadLine(); //read a line from the file
+                                            //proccess the lines read from the file
+                                            //if the readLine is null then no line was return on the
+                                            //  execution of .ReadLine()
+                                            //the value of your string will be null
+                                            //you can use this fact to determine the end of the file
+        while (readLine != null)
+        {
+            //you have a line from the file to process
+            countReadLines++;
+            Console.WriteLine($"Line {countReadLines} is {readLine}");
+
+            //this error is a typical convert string to a numeric WITHOUT
+            //   first doing a .TryParse()
+            badnumericConversion = int.Parse(readLine);
+           
+            //get the next line from the file IF it exists
+            //if you have reached the end of the file
+            //  your readLine will be null
+            readLine = streamReader.ReadLine();
+        }
+        Console.WriteLine($"\nFile has been read. It contained {countReadLines} lines");
     }
-    streamReader.Close();
-    Console.WriteLine($"\nFile has been read. It contained {countReadLines} lines");
+    catch (ArgumentNullException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    catch (FileNotFoundException ex)
+    {
+        Console.WriteLine(ex.Message);
+    }
+    catch (Exception ex)
+    {
+        //ex is the error
+        //ex contains many properties
+        //Message property contains your error message
+        //to access the error message you will use the object operator . (dot)
+        //  syntax   objecctinstancename.propertyname
+        //                    ex        .   Message
+        Console.WriteLine(ex.Message);
+    }
+    finally
+    
+    {
+        if (streamReader != null)
+        {
+            streamReader.Close();
+        }
+    }
+
+
+}
+
+void ReadFileThrowException(StreamReader streamReader)
+{
+    
+        Console.WriteLine($"\nReading from the file {filePath}");
+        //used to hold the incoming line from the file
+        string readLine;
+        int countReadLines = 0;
+
+        int badnumericConversion = 0;
+
+
+
+        //start reading the lines
+        readLine = streamReader.ReadLine(); //read a line from the file
+                                            //proccess the lines read from the file
+                                            //if the readLine is null then no line was return on the
+                                            //  execution of .ReadLine()
+                                            //the value of your string will be null
+                                            //you can use this fact to determine the end of the file
+        while (readLine != null)
+        {
+            //you have a line from the file to process
+            countReadLines++;
+            Console.WriteLine($"Line {countReadLines} is {readLine}");
+
+            //this error is a typical convert string to a numeric WITHOUT
+            //   first doing a .TryParse()
+            badnumericConversion = int.Parse(readLine);
+
+            //get the next line from the file IF it exists
+            //if you have reached the end of the file
+            //  your readLine will be null
+            readLine = streamReader.ReadLine();
+        }
+        Console.WriteLine($"\nFile has been read. It contained {countReadLines} lines");
+    
+    
 
 
 }
